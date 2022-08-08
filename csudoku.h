@@ -5,6 +5,7 @@
 class cSudoku
 {
 public:
+    int grid[9][9];
     cSudoku();
 };
 
