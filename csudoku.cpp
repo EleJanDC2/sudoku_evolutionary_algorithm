@@ -1,4 +1,5 @@
 #include "csudoku.h"
+#include <iostream>
 
 cSudoku::cSudoku()
 {
@@ -22,4 +23,20 @@ bool cSudoku::canbeset(const int row,const int column,const int number)
     }
     //
     return canbesetbool;
+}
+
+void cSudoku::drawsudoku()
+{
+    std::cout << "--------------------------------------------------";
+    //
+    for(int i = 0; i < 9; i++)
+    {
+        for(int j = 0; j < 9; j++)
+        {
+            std::cout << grid[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+    //
+    std::cout << "--------------------------------------------------";
 }

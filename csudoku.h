@@ -8,6 +8,7 @@ public:
     int grid[9][9];
     cSudoku();
     bool canbeset(const int row,const int column,const int number);
+    void drawsudoku();
 };
 
 #endif // CSUDOKU_H
