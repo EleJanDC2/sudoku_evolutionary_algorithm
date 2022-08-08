@@ -7,7 +7,7 @@ class cSudoku
 public:
     int grid[9][9];
     cSudoku();
-    bool canbeset(int row, int column, int number);
+    bool canbeset(const int row,const int column,const int number);
 };
 
 #endif // CSUDOKU_H

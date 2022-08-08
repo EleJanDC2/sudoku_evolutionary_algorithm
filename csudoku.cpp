@@ -5,7 +5,7 @@ cSudoku::cSudoku()
 
 }
 
-bool cSudoku::canbeset(int row, int column,int number)
+bool cSudoku::canbeset(const int row,const int column,const int number)
 {
     bool canbesetbool = true;
     //
