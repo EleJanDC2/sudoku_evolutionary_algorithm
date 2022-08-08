@@ -1,5 +1,7 @@
 #include "csudoku.h"
 #include <iostream>
+#include <fstream>
+#include <string>
 
 cSudoku::cSudoku()
 {
@@ -39,4 +41,29 @@ void cSudoku::drawsudoku()
     }
     //
     std::cout << "--------------------------------------------------";
+}
+
+void cSudoku::loadsudoku()
+{
+    std::fstream file;
+    //
+    file.open("sudokuempty.txt",std::ios::in);
+    //
+    if(!file.is_open())
+    {
+        std::cout << "Unable to open file containing sudoku to solve" << std::endl;
+        return;
+    }
+    //
+    std::string line;
+
+    for(int i = 0; i < 9; i++)
+    {
+        getline(file,line);
+        for(int j = 0; j < 9; j++)
+        {
+            grid[i][j] = line[j] - 48; // From ascii to int
+        }
+    }
+
 }
