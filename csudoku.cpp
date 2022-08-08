@@ -30,6 +30,7 @@ bool cSudoku::canbeset(const int row,const int column,const int number)
 void cSudoku::drawsudoku()
 {
     std::cout << "--------------------------------------------------";
+    std::cout << std::endl;
     //
     for(int i = 0; i < 9; i++)
     {
