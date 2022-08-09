@@ -2,6 +2,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cstdlib>
+#include <time.h>
 
 cSudoku::cSudoku()
 {
@@ -68,3 +70,13 @@ void cSudoku::loadsudoku()
     }
 
 }
+
+/*
+void cSudoku::fillsudoku()
+{
+    while(true)
+    {
+
+    }
+}
+*/
