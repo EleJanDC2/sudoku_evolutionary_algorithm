@@ -62,7 +62,6 @@ void cSudoku::loadsudoku()
         for(int j = 0; j < 9; j++)
         {
             grid[i][j] = line[j] - 48;;
-            empty_spaces--;
         }
     }
     file.close();
@@ -102,7 +101,20 @@ void cSudoku::loadsudoku()
                 orginal_cell_contains[cell_number].set(grid[i][j] - 1); // PL - wypełnienie orginal_column_contains
             }
         }
-
+    }
+    //
+    for(int i = 0; i < 9; i++)
+    {
+        for(int j = 0; j < 9; j++)
+        {
+            if(grid[i][j] == 0)
+            {
+                int cell_number = (3 * int(i/3)) + int(j/3);
+                std::bitset<9> result = (row_contains[i] | column_contains[j] | cell_contains[cell_number]).flip();
+                empty_spaces.push_back(std::tuple<int,int,std::bitset<9>>{i,j,result});
+                std::cout << "i: " << i << "  " << "j: " << j << "  " << "result: " << result << std::endl;
+            }
+        }
     }
 }
 

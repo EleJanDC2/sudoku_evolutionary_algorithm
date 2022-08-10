@@ -3,12 +3,15 @@
 
 #include <array>
 #include <bitset>
+#include <vector>
+#include <tuple>
 
 class cSudoku
 {
 public:
     int grid[9][9];
-    int empty_spaces = 81;
+    std::vector<std::tuple<int,int,std::bitset<9>>> empty_spaces;
+    //std::vector<std::array<int,2>> empty_spaces;
     static std::array<std::bitset<9>,9> orginal_row_contains;
     static std::array<std::bitset<9>,9> orginal_column_contains;
     static std::array<std::bitset<9>,9> orginal_cell_contains;
