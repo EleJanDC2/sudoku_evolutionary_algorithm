@@ -8,6 +8,7 @@ class cSudoku
 {
 public:
     int grid[9][9];
+    int empty_spaces = 81;
     static std::array<std::bitset<9>,9> orginal_row_contains;
     static std::array<std::bitset<9>,9> orginal_column_contains;
     static std::array<std::bitset<9>,9> orginal_cell_contains;

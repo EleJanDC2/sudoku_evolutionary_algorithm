@@ -62,6 +62,7 @@ void cSudoku::loadsudoku()
         for(int j = 0; j < 9; j++)
         {
             grid[i][j] = line[j] - 48;;
+            empty_spaces--;
         }
     }
     file.close();
