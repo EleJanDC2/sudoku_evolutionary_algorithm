@@ -49,26 +49,60 @@ void cSudoku::drawsudoku()
 void cSudoku::loadsudoku()
 {
     std::fstream file;
-    //
     file.open("sudokuempty.txt",std::ios::in);
-    //
     if(!file.is_open())
     {
         std::cout << "Unable to open file containing sudoku to solve" << std::endl;
         return;
     }
-    //
     std::string line;
-
     for(int i = 0; i < 9; i++)
     {
         getline(file,line);
         for(int j = 0; j < 9; j++)
         {
-            grid[i][j] = line[j] - 48; // From ascii to int
+            grid[i][j] = line[j] - 48;;
         }
     }
+    file.close();
+    //
+    for(int i = 0; i < 9; i++)
+    {
+        for(int j = 0; j < 9; j++)
+        {
+            if(grid[i][j] != 0)
+            {
+                row_contains[i].set(grid[i][j] - 1); // PL - wypełnienie row_contains
+                orginal_row_contains[i].set(grid[i][j] - 1); // PL - wypełnienie orginal_row_contains
+            }
+        }
+    }
+    //
+    for(int i = 0; i < 9; i++)
+    {
+        for(int j = 0; j < 9; j++)
+        {
+            if(grid[j][i] != 0)
+            {
+                column_contains[i].set(grid[j][i] - 1); // PL - wypełnienie row_contains
+                orginal_column_contains[i].set(grid[j][i] - 1); // PL - wypełnienie orginal_column_contains
+            }
+        }
+    }
+    //
+    for(int i = 0; i < 9; i++)
+    {
+        for(int j = 0; j < 9; j++)
+        {
+            if(grid[i][j] != 0)
+            {
+                int cell_number = (3 * int(i/3)) + int(j/3);
+                cell_contains[cell_number].set(grid[i][j] - 1); // PL - wypełnienie row_contains
+                orginal_cell_contains[cell_number].set(grid[i][j] - 1); // PL - wypełnienie orginal_column_contains
+            }
+        }
 
+    }
 }
 
 /*
