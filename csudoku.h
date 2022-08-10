@@ -22,6 +22,7 @@ public:
     bool canbeset(const int row,const int column,const int number);
     void drawsudoku();
     void loadsudoku();
+    void deletefromemptyspaces(const int row,const int column,const int number);
     // void fillsudoku();
 };
 

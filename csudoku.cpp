@@ -118,6 +118,14 @@ void cSudoku::loadsudoku()
     }
 }
 
+void cSudoku::deletefromemptyspaces(const int row,const int column,const int number)
+{
+    row_contains[row].set(number-1);
+    column_contains[column].set(number-1);
+    int cell_number = (3 * int(row/3)) + int(column/3);
+    cell_contains[cell_number].set(number-1);
+}
+
 /*
 void cSudoku::fillsudoku()
 {
