@@ -53,7 +53,7 @@ void cSudoku::drawsudoku()
             {
                 int cell_number = (3 * int(i/3)) + int(j/3);
                 std::bitset<9> result = (row_contains[i] | column_contains[j] | cell_contains[cell_number]).flip();
-                std::cout << "i: " << i << "  " << "j: " << j << "  " << "result: " << result << std::endl;
+                // std::cout << "i: " << i << "  " << "j: " << j << "  " << "result: " << result << std::endl;
             }
         }
     }
@@ -211,12 +211,3 @@ void cSudoku::fillsudoku()
     this->drawsudoku();
 }
 
-/*
-void cSudoku::fillsudoku()
-{
-    while(true)
-    {
-
-    }
-}
-*/
