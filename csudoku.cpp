@@ -44,20 +44,6 @@ void cSudoku::drawsudoku()
         std::cout << std::endl;
     }
     //
-    std::cout << std::endl;
-    for(int i = 0; i < 9; i++)
-    {
-        for(int j = 0; j < 9; j++)
-        {
-            if(grid[i][j] == 0)
-            {
-                int cell_number = (3 * int(i/3)) + int(j/3);
-                std::bitset<9> result = (row_contains[i] | column_contains[j] | cell_contains[cell_number]).flip();
-                // std::cout << "i: " << i << "  " << "j: " << j << "  " << "result: " << result << std::endl;
-            }
-        }
-    }
-    //
     int empty_spaces_size = empty_spaces.size();
     std::cout << "empty_spaces: " << empty_spaces_size << std::endl;
     for(int i = 0; i < empty_spaces_size; i++)
