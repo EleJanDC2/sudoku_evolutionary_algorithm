@@ -28,7 +28,10 @@ public:
     void loadsudoku();
     void deletefromemptyspaces(const int row,const int column,const int number);
     void fillsudoku();
-    // void fillsudoku();
+    bool operator< (const cSudoku &other) const
+    {
+        return empty_spaces.size() < other.empty_spaces.size();
+    }
 };
 
 #endif // CSUDOKU_H
