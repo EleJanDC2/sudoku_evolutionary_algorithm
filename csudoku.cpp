@@ -133,7 +133,7 @@ void cSudoku::loadsudoku()
                 int cell_number = (3 * int(i/3)) + int(j/3);
                 std::bitset<9> result = (row_contains[i] | column_contains[j] | cell_contains[cell_number]).flip();
                 empty_spaces.push_back(std::tuple<int,int,std::bitset<9>>{i,j,result});
-                std::cout << "i: " << i << "  " << "j: " << j << "  " << "result: " << result << std::endl;
+                //std::cout << "i: " << i << "  " << "j: " << j << "  " << "result: " << result << std::endl;
             }
         }
     }
@@ -180,7 +180,7 @@ void cSudoku::fillsudoku()
             int numbertofill = rand() % 9 + 1;
             std::bitset<9> hg = std::get<2>(empty_spaces[field]);
             if(!hg.any()) break;
-            std::cout << "numbertofill: " << numbertofill << "    " << "i: " << std::get<0>(empty_spaces[field]) << "    " << "j: " << std::get<1>(empty_spaces[field]) << std::endl;
+            // std::cout << "numbertofill: " << numbertofill << "    " << "i: " << std::get<0>(empty_spaces[field]) << "    " << "j: " << std::get<1>(empty_spaces[field]) << std::endl;
             if(hg.test(numbertofill-1) && canbeset(std::get<0>(empty_spaces[field]),std::get<1>(empty_spaces[field]),numbertofill))
             {
                 grid[std::get<0>(empty_spaces[field])][std::get<1>(empty_spaces[field])] = numbertofill;
