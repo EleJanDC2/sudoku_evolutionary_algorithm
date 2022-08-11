@@ -172,11 +172,15 @@ void cSudoku::fillsudoku()
         int empty_spaces_size = empty_spaces.size();
         //
         int field = rand() % empty_spaces_size;
+
+        int tryof = 0;
         //
         while(true)
         {
             int numbertofill = rand() % 9 + 1;
             std::bitset<9> hg = std::get<2>(empty_spaces[field]);
+            if(!hg.any()) break;
+            std::cout << "numbertofill: " << numbertofill << "    " << "i: " << std::get<0>(empty_spaces[field]) << "    " << "j: " << std::get<1>(empty_spaces[field]) << std::endl;
             if(hg.test(numbertofill-1) && canbeset(std::get<0>(empty_spaces[field]),std::get<1>(empty_spaces[field]),numbertofill))
             {
                 grid[std::get<0>(empty_spaces[field])][std::get<1>(empty_spaces[field])] = numbertofill;
@@ -185,10 +189,13 @@ void cSudoku::fillsudoku()
                 //Delete from empty_spaces.
                 empty_spaces.erase(empty_spaces.begin()+field);
                 //
-                this->drawsudoku();
-                //
                 break;
             }
+            else
+            {
+                tryof++;
+            }
+            if(tryof >= 100) exit(1);
         }
         //
         if(empty_spaces.empty()) break;
