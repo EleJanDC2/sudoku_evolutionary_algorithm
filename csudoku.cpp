@@ -7,7 +7,8 @@
 
 cSudoku::cSudoku()
 {
-
+    instance++;
+    ID = instance;
 }
 
 bool cSudoku::canbeset(const int row,const int column,const int number)
