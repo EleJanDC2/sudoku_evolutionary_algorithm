@@ -189,14 +189,11 @@ void cSudoku::fillsudoku()
                 //
                 //Delete from empty_spaces.
                 empty_spaces.erase(empty_spaces.begin()+field);
-                this->drawsudoku();
                 //
                 break;
             }
-            else
-            {
-                tryof++;
-            }
+            else tryof++;
+            //
             if(tryof >= 100)
             {
                 std::cout << "EXIT IN fillsudoku()" << std::endl;
@@ -209,12 +206,9 @@ void cSudoku::fillsudoku()
         {
             if(std::get<2>(empty_spaces[i]).any()) still = true;
         }
-        if(still == false)
-        {
-            break;
-        }
+        if(still == false) break;
     }
-
+    this->drawsudoku();
 }
 
 /*
