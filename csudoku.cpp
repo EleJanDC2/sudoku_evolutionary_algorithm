@@ -57,6 +57,13 @@ void cSudoku::drawsudoku()
         }
     }
     //
+    int empty_spaces_size = empty_spaces.size();
+    std::cout << "empty_spaces: " << empty_spaces_size << std::endl;
+    for(int i = 0; i < empty_spaces_size; i++)
+    {
+        std::cout << "i: " << std::get<0>(empty_spaces[i]) << "  " << "j: " << std::get<1>(empty_spaces[i]) << "  " << "result: " << std::get<2>(empty_spaces[i]) << std::endl;
+    }
+    //
     std::cout << "--------------------------------------------------";
 }
 
@@ -138,23 +145,22 @@ void cSudoku::deletefromemptyspaces(const int row,const int column,const int num
     column_contains[column].set(number-1);
     int cell_number = (3 * int(row/3)) + int(column/3);
     cell_contains[cell_number].set(number-1);
-    //int empty_spaces_size = empty_spaces.size();
     for(auto && tuple : empty_spaces)
     {
         if(std::get<0>(tuple) == row)
         {
-            std::get<2>(tuple).set(number-1);
+            std::get<2>(tuple).reset(number-1);
         }
         //
         if(std::get<1>(tuple) == column)
         {
-            std::get<2>(tuple).set(number-1);
+            std::get<2>(tuple).reset(number-1);
         }
         //
         int cell_number_tested = (3 * int(std::get<0>(tuple)/3)) + int(std::get<1>(tuple)/3);
         if(cell_number_tested == cell_number)
         {
-            std::get<2>(tuple).set(number-1);
+            std::get<2>(tuple).reset(number-1);
         }
     }
 }
