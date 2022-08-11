@@ -194,6 +194,6 @@ void cSudoku::fillsudoku()
         }
         if(still == false) break;
     }
-    this->drawsudoku();
+    if(CONSOLE_INFO) this->drawsudoku();
 }
 

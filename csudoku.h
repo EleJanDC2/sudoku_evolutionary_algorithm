@@ -6,6 +6,8 @@
 #include <vector>
 #include <tuple>
 
+#define CONSOLE_INFO 0
+
 class cSudoku
 {
 public:
