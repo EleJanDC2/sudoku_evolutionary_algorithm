@@ -133,7 +133,7 @@ void cSudoku::loadsudoku()
                 int cell_number = (3 * int(i/3)) + int(j/3);
                 std::bitset<9> result = (row_contains[i] | column_contains[j] | cell_contains[cell_number]).flip();
                 empty_spaces.push_back(std::tuple<int,int,std::bitset<9>>{i,j,result});
-                std::cout << "i: " << i << "  " << "j: " << j << "  " << "result: " << result << std::endl;
+                //std::cout << "i: " << i << "  " << "j: " << j << "  " << "result: " << result << std::endl;
             }
         }
     }
@@ -172,11 +172,15 @@ void cSudoku::fillsudoku()
         int empty_spaces_size = empty_spaces.size();
         //
         int field = rand() % empty_spaces_size;
+
+        int tryof = 0;
         //
         while(true)
         {
             int numbertofill = rand() % 9 + 1;
             std::bitset<9> hg = std::get<2>(empty_spaces[field]);
+            if(!hg.any()) break;
+            // std::cout << "numbertofill: " << numbertofill << "    " << "i: " << std::get<0>(empty_spaces[field]) << "    " << "j: " << std::get<1>(empty_spaces[field]) << std::endl;
             if(hg.test(numbertofill-1) && canbeset(std::get<0>(empty_spaces[field]),std::get<1>(empty_spaces[field]),numbertofill))
             {
                 grid[std::get<0>(empty_spaces[field])][std::get<1>(empty_spaces[field])] = numbertofill;
@@ -184,14 +188,30 @@ void cSudoku::fillsudoku()
                 //
                 //Delete from empty_spaces.
                 empty_spaces.erase(empty_spaces.begin()+field);
-                //
                 this->drawsudoku();
                 //
                 break;
             }
+            else
+            {
+                tryof++;
+            }
+            if(tryof >= 100)
+            {
+                std::cout << "EXIT IN fillsudoku()" << std::endl;
+                exit(1);
+            }
         }
         //
-        if(empty_spaces.empty()) break;
+        bool still = false;
+        for(int i = 0; i < empty_spaces_size; i++)
+        {
+            if(std::get<2>(empty_spaces[i]).any()) still = true;
+        }
+        if(still == false)
+        {
+            break;
+        }
     }
 
 }
