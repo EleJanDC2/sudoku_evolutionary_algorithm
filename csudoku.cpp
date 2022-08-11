@@ -176,11 +176,13 @@ void cSudoku::fillsudoku()
                 //Delete from empty_spaces.
                 empty_spaces.erase(empty_spaces.begin()+field);
                 //
+                tryof = 0;
+                //
                 break;
             }
             else tryof++;
             //
-            if(tryof >= 100)
+            if(tryof >= 1000)
             {
                 std::cout << "EXIT IN fillsudoku()" << std::endl;
                 exit(1);
