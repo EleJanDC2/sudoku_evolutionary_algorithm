@@ -23,6 +23,7 @@ public:
     void drawsudoku();
     void loadsudoku();
     void deletefromemptyspaces(const int row,const int column,const int number);
+    void fillsudoku();
     // void fillsudoku();
 };
 

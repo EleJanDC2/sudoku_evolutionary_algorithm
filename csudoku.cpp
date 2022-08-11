@@ -159,6 +159,37 @@ void cSudoku::deletefromemptyspaces(const int row,const int column,const int num
     }
 }
 
+void cSudoku::fillsudoku()
+{
+    while(true)
+    {
+        int empty_spaces_size = empty_spaces.size();
+        //
+        int field = rand() % empty_spaces_size;
+        //
+        while(true)
+        {
+            int numbertofill = rand() % 9 + 1;
+            std::bitset<9> hg = std::get<2>(empty_spaces[field]);
+            if(hg.test(numbertofill-1) && canbeset(std::get<0>(empty_spaces[field]),std::get<1>(empty_spaces[field]),numbertofill))
+            {
+                grid[std::get<0>(empty_spaces[field])][std::get<1>(empty_spaces[field])] = numbertofill;
+                deletefromemptyspaces(std::get<0>(empty_spaces[field]),std::get<1>(empty_spaces[field]),numbertofill);
+                //
+                //Delete from empty_spaces.
+                empty_spaces.erase(empty_spaces.begin()+field);
+                //
+                this->drawsudoku();
+                //
+                break;
+            }
+        }
+        //
+        if(empty_spaces.empty()) break;
+    }
+
+}
+
 /*
 void cSudoku::fillsudoku()
 {
