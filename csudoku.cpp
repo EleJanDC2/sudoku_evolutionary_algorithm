@@ -11,6 +11,86 @@ cSudoku::cSudoku()
     ID = instance;
 }
 
+cSudoku::cSudoku(const cSudoku &parent1,const cSudoku &parent2,const cSudoku &progenitor)
+{
+    instance++;
+    ID = instance;
+    // PL - Kopiowanie orginalnej pustej planszy do nowego potomstwa
+    for(int i = 0; i< 9;i++)
+    {
+        for(int j = 0; j <9 ;j++)
+        {
+            grid[i][j] = progenitor.grid[i][j];
+        }
+    }
+    //
+    this->row_contains = progenitor.row_contains;
+    this->orginal_row_contains = progenitor.row_contains;
+    this->column_contains = progenitor.column_contains;
+    this->orginal_column_contains = progenitor.column_contains;
+    this->cell_contains = progenitor.cell_contains;
+    this->orginal_cell_contains = progenitor.cell_contains;
+    //
+    for(int i = 0; i < 9; i++)
+    {
+        for(int j = 0; j < 9; j++)
+        {
+            if(grid[i][j] == 0)
+            {
+                int cell_number = (3 * int(i/3)) + int(j/3);
+                std::bitset<9> result = (row_contains[i] | column_contains[j] | cell_contains[cell_number]).flip();
+                empty_spaces.push_back(std::tuple<int,int,std::bitset<9>>{i,j,result});
+                //std::cout << "i: " << i << "  " << "j: " << j << "  " << "result: " << result << std::endl;
+            }
+        }
+    }
+    //
+    if(CONSOLE_INFO) std::cout << "checkpoint1" << std::endl;
+    //
+    int tryof = 0;
+    bool turn = 0; //0 - parents 1, 1 - parents 2
+    const cSudoku * Parent;
+    while(true)
+    {
+        if(turn == 0) Parent = &parent1;
+        else Parent = &parent2;
+        //
+        while(true)
+        {
+            int empty_spaces_size = empty_spaces.size();
+            //
+            int field = rand() % empty_spaces_size;
+            //
+            int i = std::get<0>(empty_spaces[field]);
+            int j = std::get<1>(empty_spaces[field]);
+            std::bitset<9> bs = std::get<2>(empty_spaces[field]);
+            if(Parent->grid[i][j] != 0 && canbeset(i,j,Parent->grid[i][j]))
+            {
+                grid[i][j] = Parent->grid[i][j];
+                deletefromemptyspaces(i,j,grid[i][j]);
+                empty_spaces.erase(empty_spaces.begin()+field);
+                turn = !turn;
+                tryof = 0;
+                break;
+            }
+            else
+            {
+                tryof++;
+            }
+            if(!bs.any()) break;
+        }
+        bool still = false;
+        int empty_spaces_size = empty_spaces.size();
+        for(int i = 0; i < empty_spaces_size; i++)
+        {
+            if(std::get<2>(empty_spaces[i]).any()) still = true;
+        }
+        if(still == false) break;
+        if(tryof >= 300) break;
+    }
+    fillsudoku();
+}
+
 bool cSudoku::canbeset(const int row,const int column,const int number)
 {
     bool canbesetbool = true;

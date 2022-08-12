@@ -23,6 +23,7 @@ public:
     std::array<std::bitset<9>,9> column_contains;
     std::array<std::bitset<9>,9> cell_contains;
     cSudoku();
+    cSudoku(const cSudoku &parent1,const cSudoku &parent2,const cSudoku &progenitor);
     bool canbeset(const int row,const int column,const int number);
     void drawsudoku();
     void loadsudoku();
