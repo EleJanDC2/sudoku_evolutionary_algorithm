@@ -59,12 +59,15 @@ cSudoku::cSudoku(const cSudoku &parent1,const cSudoku &parent2,const cSudoku &pr
         {
             int empty_spaces_size = empty_spaces.size();
             //
+            if(empty_spaces_size == 0) break;
+            //
             int field = rand() % empty_spaces_size;
             //
             int i = std::get<0>(empty_spaces[field]);
             int j = std::get<1>(empty_spaces[field]);
             std::bitset<9> bs = std::get<2>(empty_spaces[field]);
-            if(Parent->grid[i][j] != 0 && canbeset(i,j,Parent->grid[i][j]))
+            int tofill = Parent->grid[i][j];
+            if(Parent->grid[i][j] != 0 && canbeset(i,j,tofill))
             {
                 grid[i][j] = Parent->grid[i][j];
                 deletefromemptyspaces(i,j,grid[i][j]);
@@ -78,6 +81,7 @@ cSudoku::cSudoku(const cSudoku &parent1,const cSudoku &parent2,const cSudoku &pr
                 tryof++;
             }
             if(!bs.any()) break;
+            if(tryof >= 300) break;
         }
         bool still = false;
         int empty_spaces_size = empty_spaces.size();
@@ -87,6 +91,9 @@ cSudoku::cSudoku(const cSudoku &parent1,const cSudoku &parent2,const cSudoku &pr
         }
         if(still == false) break;
         if(tryof >= 300) break;
+        //
+
+        //
     }
     fillsudoku();
 }
@@ -234,9 +241,12 @@ void cSudoku::deletefromemptyspaces(const int row,const int column,const int num
 
 void cSudoku::fillsudoku()
 {
+    int tryoftriger = 0;
     while(true)
     {
         int empty_spaces_size = empty_spaces.size();
+        //
+        if(empty_spaces_size == 0) break;
         //
         int field = rand() % empty_spaces_size;
 
@@ -264,8 +274,8 @@ void cSudoku::fillsudoku()
             //
             if(tryof >= 1000)
             {
-                std::cout << "EXIT IN fillsudoku()" << std::endl;
-                exit(1);
+                tryoftriger++;
+                break;
             }
         }
         //
@@ -275,6 +285,7 @@ void cSudoku::fillsudoku()
             if(std::get<2>(empty_spaces[i]).any()) still = true;
         }
         if(still == false) break;
+        if(tryoftriger >= 2) break;
     }
     if(CONSOLE_INFO) this->drawsudoku();
 }
