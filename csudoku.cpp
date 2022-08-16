@@ -147,10 +147,13 @@ void cSudoku::drawsudoku()
     }
     //
     int empty_spaces_size = empty_spaces.size();
-    std::cout << "empty_spaces: " << empty_spaces_size << std::endl;
-    for(int i = 0; i < empty_spaces_size; i++)
+    if(empty_spaces_size != 0)
     {
-        std::cout << "i: " << std::get<0>(empty_spaces[i]) << "  " << "j: " << std::get<1>(empty_spaces[i]) << "  " << "result: " << std::get<2>(empty_spaces[i]) << std::endl;
+        std::cout << "empty_spaces: " << empty_spaces_size << std::endl;
+        for(int i = 0; i < empty_spaces_size; i++)
+        {
+            std::cout << "i: " << std::get<0>(empty_spaces[i]) << "  " << "j: " << std::get<1>(empty_spaces[i]) << "  " << "result: " << std::get<2>(empty_spaces[i]) << std::endl;
+        }
     }
     //
     std::cout << "--------------------------------------------------";
