@@ -98,6 +98,21 @@ cSudoku::cSudoku(const cSudoku &parent1,const cSudoku &parent2,const cSudoku &pr
     fillsudoku();
 }
 
+bool cSudoku::operator == (const cSudoku &other) const
+{
+    bool identical = true;
+    //
+    for(int i = 0; i <9 ;i++)
+    {
+        for(int j = 0; j < 9 ;j++)
+        {
+            if(this->grid[i][j] != other.grid[i][j] ) identical = false;
+        }
+    }
+    //
+    return identical;
+}
+
 bool cSudoku::canbeset(const int row,const int column,const int number)
 {
     bool canbesetbool = true;

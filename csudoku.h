@@ -33,6 +33,8 @@ public:
     {
         return empty_spaces.size() < other.empty_spaces.size();
     }
+    bool operator == (const cSudoku &other) const;
+
 };
 
 #endif // CSUDOKU_H
